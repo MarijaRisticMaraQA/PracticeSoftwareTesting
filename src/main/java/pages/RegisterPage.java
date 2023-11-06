@@ -82,8 +82,7 @@ public class RegisterPage extends BasePage{
 
 	public void assertLoggedInUser() {
 
-		WebElement loggedInUser = getElement(loggedInUserName);
-		String actualLoggedInUser = loggedInUser.getText();
+		String actualLoggedInUser = getElement(loggedInUserName).getText();
 		String expectedLoggedInUser = firstName + " " + lastName;
 
 		assertEquals(actualLoggedInUser, expectedLoggedInUser, "Users are not matching");
