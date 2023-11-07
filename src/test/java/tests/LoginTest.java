@@ -12,4 +12,11 @@ public class LoginTest extends BaseTest {
 
 		loginPage = new LoginPage(driver);
 	}
+
+	@Test
+	public void loginUserJane() {
+
+		loginPage.loginUser();
+		loginPage.assertLoggedInUser();
+	}
 }
