@@ -1,6 +1,8 @@
 package pages;
 
 import com.github.javafaker.Faker;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.JavascriptExecutor;
@@ -13,11 +15,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.List;
 
+
 public class BasePage {
 
 	protected WebDriver driver;
 	protected WebDriverWait wait;
 	Faker faker;
+	private static final Logger log = LogManager.getLogger(BasePage.class.getName());
 
 	public BasePage (WebDriver driver) {
 
@@ -60,5 +64,17 @@ public class BasePage {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	protected boolean matchesExpectedText(By locator, String expectedText) {
+
+		WebElement element = getElement(locator);
+		if (element.getText().trim().equals(expectedText)) {
+			log.info("PASSED - Text found in element: " + element.getText() + " is matching with expected text: " + expectedText);
+			return true;
+		} else {
+			log.error("FAILED - Text found in element: " + element.getText() + " is not matching with expected text: " + expectedText);
+		}
+		return false;
 	}
 }
