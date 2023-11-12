@@ -21,7 +21,7 @@ public class RegisterTest extends BaseTest{
 		loginPage = new LoginPage(driver);
 	}
 	@Test(description = "Registering user")
-	public void registerTest() throws InterruptedException {
+	public void registerTest(){
 
 		registerPage.goToRegisterPage()
 				.registerUser();
@@ -30,11 +30,20 @@ public class RegisterTest extends BaseTest{
 		assertTrue(registerPage.isUserRegisteredAndLoggedIn(), "User is not registered");
 	}
 
-	@Test
+	@Test(description = "Registering user from json file")
 	public void registerTestFromJson() {
 
 		registerPage.goToRegisterPage()
 				.registerNewUser();
+		loginPage.loginUser(registerPage.getUsername(), registerPage.getPassword());
+		assertTrue(registerPage.isUserRegisteredAndLoggedIn(), "User is not registered");
+	}
+
+	@Test(description = "Registering user with faker constructor")
+	public void registerNewFakeUser() {
+
+		registerPage.goToRegisterPage()
+				.registerNewFakerUser();
 		loginPage.loginUser(registerPage.getUsername(), registerPage.getPassword());
 		assertTrue(registerPage.isUserRegisteredAndLoggedIn(), "User is not registered");
 	}

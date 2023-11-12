@@ -1,5 +1,6 @@
 package pages;
 
+import model.RegisterUserFakerModel;
 import model.RegisterUserModel;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -48,7 +49,7 @@ public class RegisterPage extends BasePage{
 		return this;
 	}
 
-	public RegisterPage registerUser() throws InterruptedException {
+	public RegisterPage registerUser() {
 
 		username = faker.internet().emailAddress();
 		password = faker.internet().password();
@@ -77,8 +78,8 @@ public class RegisterPage extends BasePage{
 
 		RegisterUserModel user = Utils.gerDataFromJson();
 
-		username = faker.internet().emailAddress();
-		password = faker.internet().password();
+		username = user.getUsername();
+		password = user.getPassword();
 
 		typeInput(firstNameField, user.getFirstName());
 		typeInput(lastNameField, user.getLastName());
@@ -95,11 +96,35 @@ public class RegisterPage extends BasePage{
 		clickOnElement(submitButton);
 		Utils.waitForSeconds(1);
 
+		return this;
+	}
 
+	public RegisterPage registerNewFakerUser() {
+
+		RegisterUserFakerModel register = new RegisterUserFakerModel();
+
+		username = register.getUsername();
+		password = register.getPassword();
+
+		typeInput(firstNameField, register.getFirstName());
+		typeInput(lastNameField, register.getLastName());
+		typeInput(dateOfBirthField, birthInput());
+		typeInput(addressField, register.getAddress());
+		typeInput(postcodeField, register.getPostcode());
+		typeInput(cityField, register.getCity());
+		typeInput(stateField, register.getState());
+		selectCountry();
+		typeInput(phoneField, register.getPhone());
+		typeInput(emailField, username);
+		typeInput(passwordField, password);
+
+		clickOnElement(submitButton);
+		Utils.waitForSeconds(1);
 		return this;
 	}
 
 	private void selectCountry() {
+
 
 		Select objSelect = new Select(getElement(countryDropdown));
 		objSelect.selectByVisibleText("Serbia");

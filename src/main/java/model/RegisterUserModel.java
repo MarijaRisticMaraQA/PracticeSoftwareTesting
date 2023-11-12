@@ -20,4 +20,6 @@ public class RegisterUserModel {
 	private String city;
 	private String state;
 	private String phone;
+	private String username;
+	private String password;
 }
