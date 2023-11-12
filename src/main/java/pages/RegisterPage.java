@@ -1,6 +1,5 @@
 package pages;
 
-import model.RegisterUserFakerModel;
 import model.RegisterUserModel;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -101,7 +100,7 @@ public class RegisterPage extends BasePage{
 
 	public RegisterPage registerNewFakerUser() {
 
-		RegisterUserFakerModel register = new RegisterUserFakerModel();
+		RegisterUserModel register = new RegisterUserModel();
 
 		username = register.getUsername();
 		password = register.getPassword();
