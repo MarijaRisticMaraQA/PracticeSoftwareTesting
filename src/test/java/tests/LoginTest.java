@@ -1,9 +1,12 @@
 package tests;
 
 import dataproviders.LoginDataProviders;
+import listeners.RetryAnalyzer;
+import listeners.TestListener;
 import model.LoginUserModel;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pages.LoginPage;
 import pages.RegisterPage;
@@ -13,6 +16,7 @@ import java.util.List;
 
 import static org.testng.Assert.assertTrue;
 
+@Listeners(TestListener.class)
 public class LoginTest extends BaseTest {
 
 	LoginPage loginPage;
@@ -26,7 +30,8 @@ public class LoginTest extends BaseTest {
 		registerPage = new RegisterPage(driver);
 	}
 
-	@Test(description = "Login user")
+	@Test(description = "Login user",
+	retryAnalyzer = RetryAnalyzer.class)
 	public void loginUserTest() {
 
 		loginPage.goToLoginForm()

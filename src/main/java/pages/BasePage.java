@@ -11,10 +11,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.Utils;
 
 import java.time.Duration;
 import java.util.List;
-
+import java.util.PrimitiveIterator;
 
 public class BasePage {
 
@@ -22,11 +23,12 @@ public class BasePage {
 	protected WebDriverWait wait;
 	Faker faker;
 	private static final Logger log = LogManager.getLogger(BasePage.class.getName());
+	private long waitTime = Long.parseLong(Utils.dotenv().get("EXPLICIT_WAIT_TIME"));
 
 	public BasePage (WebDriver driver) {
 
 		this.driver = driver;
-		wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+		wait = new WebDriverWait(driver, Duration.ofSeconds(waitTime));
 		faker = new Faker();
 	}
 

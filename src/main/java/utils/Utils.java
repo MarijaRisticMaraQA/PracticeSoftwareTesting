@@ -2,6 +2,7 @@ package utils;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import io.github.cdimascio.dotenv.Dotenv;
 import model.LoginUserModel;
 import model.RegisterUserModel;
 
@@ -42,5 +43,12 @@ public class Utils {
 			e.printStackTrace();
 		}
 		return new Gson().fromJson(reader, new TypeToken<RegisterUserModel>(){}.getType());
+	}
+
+	public static Dotenv dotenv() {
+		return Dotenv.configure()
+				.ignoreIfMalformed()
+				.ignoreIfMissing()
+				.load();
 	}
 }
